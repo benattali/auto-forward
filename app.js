@@ -13,6 +13,19 @@ app.message('hello', async ({ message, say }) => {
   await say(`Hey there <@${message.user}>!`);
 });
 
+app.message("send", async ({ message, client, logger }) => {
+  try {
+    await client.chat.postMessage({
+      channel: "C03RF61Q1LY",
+      text: `sent by <@${message.user}>
+      sent from <#${message.channel}>`
+    });
+  }
+  catch (error) {
+    logger.error(error)
+  }
+});
+
 (async () => {
   // Start the app
   await app.start(process.env.PORT || 3000);
