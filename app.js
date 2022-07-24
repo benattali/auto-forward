@@ -1,4 +1,5 @@
 const { App } = require('@slack/bolt');
+// this makes it easier to use the env vars
 require('dotenv').config()
 
 const app = new App({
@@ -15,6 +16,7 @@ app.message('hello', async ({ message, say }) => {
 
 app.message("send", async ({ message, client, logger }) => {
   try {
+    // send a message to different channel
     await client.chat.postMessage({
       channel: "C03RF61Q1LY",
       text: `sent by <@${message.user}>
@@ -27,7 +29,6 @@ app.message("send", async ({ message, client, logger }) => {
 });
 
 (async () => {
-  // Start the app
   await app.start(process.env.PORT || 3000);
 
   console.log('⚡️ Bolt app is running!');
